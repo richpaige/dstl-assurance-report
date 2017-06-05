@@ -1,0 +1,88 @@
+\documentclass{llncs}
+
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{courier}
+\usepackage{listings}
+
+
+\input{listings.tex}
+
+
+\begin{document}
+
+
+\title{Technical Obsolescence Management Strategies for Safety-Related Software for Airborne Systems -- Assurance Report}
+
+\author{Richard F. Paige\inst{1}, Simos Gerasimou\inst{1} and Dimitris Kolovos\inst{1}}
+
+\institute{
+Department of Computer Science, University of York, UK.\\
+\email{[richard.paige,simos.gerasimou,dimitris.kolovos]\_at\_york.ac.uk}
+}
+\maketitle
+
+\begin{abstract}
+This report briefly summarises the technical challenges associated with certification (and re-certification)
+of software after a particular obsolescence management strategy -- described in a companion report -- has
+been carried out. In particular, it firstly considers the types of evidence that can
+be produced by the management strategy. Secondly, it considers the DO-178B objectives and analyses where specific objectives
+may need to be reconsidered in order to achieve re-certification. In this manner it aims to demonstrate where
+re-certification effort may need to be prioritised.Finally, it briefly comments on two issues: qualification of tools that support
+the management strategy, and automatic generation of certification cases, which may help to reduce the amount of effort 
+required in supporting re-certification.
+\end{abstract}
+
+\section{Introduction}
+Complex software systems deployed in safety-critical and business-critical 
+application domains (e.g., avionics, defence, healthcare) are meant to provide 
+service for decades. Although many of these systems withstand technological 
+evolution and infrequently undergo substantial changes, they will likely face 
+software obsolescence problems during their lifetime. 
+Resolving these obsolescence problems is an expensive, time-consuming and 
+labour intensive process. The costs
+
+In this project, we explore reactive strategies for managing software 
+obsolescence in safety-related software for airborne 
+systems~\cite{ProjectResponse}. More specifically, we 
+investigate the extent to which \textit{software modernisation} -- i.e., 
+approaches that involve changes to the system 
+structure, adaptation to more advanced technologies, and functionality 
+enhancement -- can mitigate the problem of software obsolescence and extend the 
+life, performance and reliability of existing systems. We adopt an 
+experimental-based approach and use a set of demonstrators to explore different 
+facets of software modernisation, 
+including reverse engineering, program understanding, demonstration of 
+functional equivalence of 
+migrated code, change in hardware platform, maintenance of performance, and 
+preservation of Design Assurance Levels (DAL).
+
+In this report we focus on certification and assurance issues, specifically: if the obsolescence management strategy
+presented in the companion report is applied to a system at DAL-C, what are the certification issues associated with
+the migrated software? In particular, what effort will be required to re-certify the software system, and what evidence
+can the strategy provide in order to support re-certification?
+
+The emphasis in this 11-month project sponsored by DSTL has been on building and evaluating a technical solution to
+software obsolescence on several case studies; assurance and certification has been a secondary concern. As such, this
+report is primarily speculative. It is structured as follows. Firstly, we describe the evidence that is produced by the 
+obsolescence strategy and technical solution that is relevant to certification and recertification. We also briefly describe
+the toolchain that has been developed to support the obsolescence strategy, so that the report is moderately self-contained
+and hence easier to follow. Next, we analyse the DO-178B objectives and summarise which specific objectives \textit{must} and
+\textit{could} be reconsidered as a result of applying the strategy. Finally, we comment on two issues: that of tool qualification
+(and the challenges that will arise in qualifying the toolchain developed within this project), and of automatically generating 
+assurance/safety cases from the engineering artefacts that are provided as input to the obsolescence strategy.
+
+\section{Evidence and Assumptions}
+
+\section{Certification and DO-178B Objectives}
+
+\section{The Future: Tool Qualification and Assurance Case Generation}
+
+\section{Conclusions}
+
+\bibliographystyle{abbrv}
+\bibliography{bibliography}
+\renewcommand{\baselinestretch}{1.0}
+
+
+\end{document}

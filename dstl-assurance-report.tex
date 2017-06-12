@@ -248,6 +248,23 @@ This table is of course \textit{directly} impacted across all objectives as ther
 
 
 \section{The Future: Tool Qualification and Assurance Case Generation}
+In this section we briefly explore two issues that have not been considered at all in this project -- tool qualification and assurance case generation -- and posit on some of the difficulties associated with their use in the future.
+
+\subsection{Tool Qualification}
+The technical solution that has been produced in this project automates otherwise manual processes (e.g., API rewriting). As such, and according to SC-205/WG-71, assurance should be obtained that the technical solution is at least as dependable as the manual approach. 
+
+DO-178C defines three criteria that determine the applicable tool qualification level (TQL); one is relevant to the technical solution that has been produced in this project:
+
+\begin{quotation}
+\textbf{Criteria 1:} A tool whose output is part of the airborne software and thus could insert an error.
+\end{quotation}
+Criteria 2 relates to verification processes (which are not considered by the technical solution), whereas Criteria 3 relates to failure of detection of errors. We do not believe that Criteria 3 is relevant as it is focused on verification tools. As such, Criteria 1 is relevant to the technical solution. If the qualification criterion for the software application being rehosted is Level C, then the applicable TQL is level 3: the replacement of DO-178B development tool for each software level.
+
+With respect to DO-330/ED-215, there are a number of considerations related to tool qualification for the technical solution. 
+
+Firstly, the operational environment for the technical solution needs to be established. This needs to meet specific objectives related to installing the technical solution in the appropriate environment, showing that the tool requirements are compatible with the operational environment, etc. It should be observed that the technical solution has been developed in an iterative and incremental manner, in close collaboration with DSTL, and as such a rigorous requirements specification for the tool has not been produced. As such, additional future work will need to be carried out on this. This should likely include the \textit{Tool Operational Requirements (TOR)} (i.e., Section~10.3.1 of DO-330). 
+
+The TOR for the technical solution that has been produced is complicated, in part because the tool has interfaces with other tools, particularly Eclipse, which has a plug-in architecture. Eclipse is a very substantial piece of software that can be customised for different purposes. This project has relied on Eclipse CDT (a set of tools for development of C/C++, including parsers) and Eclipse Epsilon (a set of tools for code generation and transformation). Capturing the tool functions and technical features will be challenging because of the generality of Eclipse. As well, capturing abnormal activation modes for the technical solution will be challenging as some of these will also depend on activation modes for Eclipse and for its sub-projects. We envision a larger research program to assess the challenges and difficulties of tool qualification within the Eclipse ecosystem, and suggest collaboration with Polarsys\footnote{\url{www.polarsys.org}} to support this.
 
 \section{Conclusions}
 

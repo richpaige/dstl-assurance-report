@@ -118,7 +118,7 @@ re-architect the software, if needed.
 
 The approach illustrated in Figure~\ref{fig:approach} is based on the use of transformation technology.
 Two types of transformations have been used to support rehosting: extraction 
-transformations (to ‚Äúpull‚Äù abstract specifications from legacy code) and text 
+transformations (to ``pull''Äù abstract specifications from legacy code) and text 
 generators, based on templates. The transformations have been implemented using Epsilon, the rich C/C++ parsing and analysis 
 infrastructure provided by the Eclipse CDT project, and ANTLR/Xtext to support 
 additional languages 
@@ -165,7 +165,7 @@ a software system using the technical approach on any previously existing safety
 In this section we discuss issues associated with migrating a software application where the original system has been certified with respect to DO-178B,
 which is an appropriate standard to be used in the development of a legacy airborne system. In particular, what we wish to investigate is the \textit{impact}
 of migration on an accomplishment summary. Recall that DO-178B identifies a set of software activities that can take place within the context of a broader 
-engineering process, and requires an accomplishment summary \cite{DO178B}] as part of the certification deliverables. The accomplishment summary is a 
+engineering process, and requires an accomplishment summary \cite{DO178B} as part of the certification deliverables. The accomplishment summary is a 
 document that demonstrates compliance of a system with the plan for software aspects of certification. The accomplishment summary in
 DO-178B requires the following to be addressed:
 
@@ -199,33 +199,52 @@ The primary safety argument underlies the software life cycle data. This is clea
 
 Several of the tables map directly to the accomplishment summary, e.g., Table 8 relates to point h, software identification, and Table 10 relates to point c. The majority of tables, i.e. 3-7, are primarily providing support for point f, software life cycle data, in the accomplishment summary. 
 
-So if an accomplishment summary has been produced for a legacy system, and the software application has been migrated, then the accomplishment summary will no longer be valid and accurate for the migrated application. What parts of the accomplishment summary -- i.e., the Objective tables in Annex A -- will either be invalidated (and hence require full work) or partially invalidated? We briefly outline the results of our initial analysis. We attempt to indicate if Objectives are \textit{directly} impacted by the application of the migration technology and strategy (and hence substantial work will be required to rebuild an accomplishment summary), and if Objectives are \textit{indirectly} impacted (in which case any rework will be minor). The assumptions are:
+So if an accomplishment summary has been produced for a legacy system, and the software application has been migrated, then the accomplishment summary will no longer be valid and accurate for the migrated application. What parts of the accomplishment summary -- i.e., the Objective tables in Annex A -- will either be invalidated (and hence require full work) or partially invalidated? We briefly outline the results of our initial analysis. We attempt to indicate if Objectives are \textit{directly} impacted by the application of the migration technology and strategy (and hence substantial work will be required to rebuild an accomplishment summary), and if Objectives are \textit{indirectly} impacted (in which case any rework will hopefully be minor). The assumptions are:
 \begin{itemize}
-\item the original system has been developed according to DO-178B;
+\item the original system has been developed according to DO-178B\footnote{Given that we are migrating legacy aerospace applications, at least in theory, this seems a reasonable assumption. In future, consideration of DO-178C will be necessary. It would also be interesting to consider technical migration of accomplishment summaries from DO-178B to DO-178C, but this is a research project in and of itself.};
 \item the software has been migrated using our technical approach, outlined in the previous section;
-\item test cases from the original system are available.
+\item test cases from the original system are available (and these test cases are automated and executable).
 \end{itemize}
-We are only able to produce a preliminary assessment of impact of migration against the DO-178B objectives, given the time and resource available. 
+We are only able to produce a preliminary assessment of impact of migration against the DO-178B objectives, given the time and resource available to us in the project. 
 
 \subsection{Table A-1: Software Planning Process}
-Our view is that this objective is only indirectly (and lightly) impacted by the application of the migration strategy and approach. There will be one-off costs associated with documenting the new development process associated with the migrated application (which is a combination of the original development process and the application of the obsolescence strategy), setting up the process, explaining it to the certification authority, etc. There may also be process improvement issues as developers become more experienced with the migration approach and can see ways to improve it or extend it. 
+Our view is that this table is only indirectly (and lightly) impacted by the application of the migration strategy and approach. There will be one-off costs associated with documenting the new development process associated with the migrated application (which is a combination of the original development process and the application of the obsolescence strategy), setting up the process, explaining it to the certification authority, etc. There may also be process improvement issues as developers become more experienced with the migration approach and can see ways to improve it or extend it. 
 
 \subsection{Table A-2: Software Development Processes}
-Our view is that this objective is indirectly impacted by the application of the migration strategy. We are assuming that the requirements have not changed, and that an architecture is still developed. THe most signfiicant impact should be with objective A-2-6 (Source code is developed) -- the migration approach produces new source code, but it is generated automatically rather than manually by an engineer. It may be that documenting the process by which source code is produced is sufficient to convince a certifying authority.
+Our view is that this table is indirectly impacted by the application of the migration strategy. We are assuming that the requirements have not changed, and that an architecture is still developed. The most signfiicant impact should be with objective A-2-6 (Source code is developed) -- the migration approach produces new source code, but it is generated automatically rather than manually by an engineer. It may be that documenting the process by which source code is produced is sufficient to convince a certifying authority.
 
 \subsection{Table A-3: Verification of Outputs of Software Requirements Process}
-This objective is indirectly impacted, but it is here that we start to see a greater impact from migration: the impact will be mitigated by reuse of tests to demonstrate that algorithms remain accurate. However, migration to a new hardware platform may affect algorithm accuracy, and so it is questionable whether, in all circumstances, that reused acceptance, integration and system tests will be sufficient to fully demonstrate that the compliance and consistency objectives have been met. If, however, reuse of tests is not possible for whatever reason, this objective will be directly and significantly impacted and all objectives in the table may need to be re-established.
+This table is indirectly impacted, but it is here that we start to see a greater impact from migration: the impact will be mitigated by reuse of tests to demonstrate that algorithms remain accurate. However, migration to a new hardware platform may affect algorithm accuracy, and so it is questionable whether, in all circumstances, that reused acceptance, integration and system tests will be sufficient to fully demonstrate that the compliance and consistency objectives have been met. If, however, reuse of tests is not possible for whatever reason, this objective will be directly and significantly impacted and all objectives in the table may need to be re-established.
 
 \subsection{Table A-4: Verification of Outputs of Software Design Process}
-As was for A-3, this objective may be \textit{directly} impacted, depending on the form of migration: in the case where migration to a new hardware platform, or a new programming language or operating system is involved, there will be direct impact. 
+This table may be \textit{directly} impacted, depending on the form of migration: in the case where migration to a new hardware platform, or a new programming language or operating system is involved, there will be direct impact. 
 
 There are similar concerns about algorithm accuracy (A-4-7) as discussed in the previous subsection. The objectives specific to software architecture (i.e., A-4-8 through A-4-13) are directly impacted due to migration, especially A-4-10 (e.g., if the new hardware platform is significantly different to the original, such as in the case of migrating from single core to multicore). In general, if the software architecture from the original system remains unchanged (i.e., behaviourally equivalent components and interfaces) then A-4-8 through A-4-13 (excepting A-4-10) should hold. New evidence will need to be produced to demonstrate that the migrated software architecture is compatible with the target architecture.
 
 \subsection{Table A-5: Verification of Outputs of Software Coding and Integration Processes}
+\label{sec:a-5}
+This table may be \textit{directly} impacted, particularly because this requires demonstration that source code complies with low-level requirements, and new source code has been produced. At worst, this will require a fresh argument to support A-5-1, to show that the migrated code complies with low-level requirements. There may be opportunities to exploit \textit{model weaving} to reduce the effort in this: since we have (from the previous summary) evidence that the original source code complies with requirements, and we have traceability (supplied by the migration strategy) from original to new source code, we envision a process where this evidence and traceability information is woven together. At the very least this could indicate which parts of the original requirements/source code relationship have changed and require re-certification. A similar approach could be used for A-5-5. 
+
+Another issue to consider is independence: if original code is migrated, is the independence (required for A-5-1) lost? Does anything new have to be done to re-establish independence when assuring the migrated code?
 
 %% This one is tricky, especially A-5-5 traceability of code to low-level requirements
 %% Also, what about the independence argument for A-5-1 and A-5-2; if you migrate the code does that invalidate the independence from the
 %% original, if you are at SW Level A or B? 
+
+\subsection{Table A-6: Testing of Outputs of Integration Process}
+This table is \textit{directly} impacted by application of the migration strategy, largely because it involves object code that must be produced from source code. As such, objectives A-6-1 through A-6-5 have to be carried out again once new object code has been produced from the new source code. Are there opportunities for reuse of the original safety argument? Perhaps -- the main difficulty will be in producing evidence to show how new object code relates to the original object code (the migration strategy that we have developed generates traceability information only for rehosting of source code; an instrumented compiler would be needed to generate traceability information for object code). If such traceability information could be provided, then a model weaving approach may potentially be applied, similar to what was discussed in Section~\ref{sec:a-5}.
+
+\subsection{Table A-7: Verification of Verification Process Results}
+This table will be \textit{directly} impacted by migration assuming that test cases (and test procedures etc) from the original application are available. However the direct impact may not be as significant as in some of the previous tables. Assuming that test cases and procedures are reused, then we do not expect objectives A-7-1 through A-7-4 to be affected. However objectives A-7-4 through A-7-8 may have to be re-established as it may be the case that the source code structures have changed as a result of rehosting (e.g., introduction of new control structures due to introduction of a new library or API), and previous MC/DC evidence is no longer valid. However, if it possible to evidence that the source code structures have not changed as a result of migration (which may be the case if it is a simple API replacement), then the previous evidence may remain valid.
+
+\subsection{Table A-8: Software Configuration Management Process}
+This table will be \textit{indirectly} affected. The issue here is whether the technical solution to software migration should be supported by the configuration management process. Effectively, does the software life cycle \textit{include} the technical software migration phase, or is this phase assumed to be out of scope? In our view it should be consider in-scope as some of the evidence used to support re-certification (traceability data) is produced by the technical solution. This traceability data must be considered in baselining activities under A-8-2. Additionally, new configuration items related to the components of the technical solution (grammars, parsers, templates, transformations) should also be considered in A-8-1. It may be that the other objectives can remain unchanged.
+
+\subsection{Table A-9: Software Quality Assurance Process}
+This table is arguably \textit{indirectly} impacted, largely because the software development and integral processes have been modified as a result of using the technical migration solution: new code is produced by applying the technical solution, and it is automatically integrated with existing code that has not changed. These processes need to be shown to comply with software plans and standards. It is not immediately clear if \textit{new} standards need to be considered with respect to the technical solution -- for example, standards for representing evidence produced by the technical solution. It may, for example, be necessary and useful to ensure that traceability evidence generated by the technical solution is compliant with suitable standards -- e.g., the OMG's Structured Assurance Case Metamodel -- even if these have not yet seen widespread use in safety critical projects.
+
+\subsection{Table A-10: Certification Liaison Process}
+This table is of course \textit{directly} impacted across all objectives as there will be changes made to the production of an accomplishment summary for the migrated code, and the certifying authority will need to be informed and will need to buy-in to the new processes. Given that certifying authorities are increasingly aware of DO-178C (and, for example, the model-based design annexe, which is aimed at supporting lifecycles with some similarity to our technical solution), this may be less problematic and challenging today than it was several years ago.
 
 
 \section{The Future: Tool Qualification and Assurance Case Generation}

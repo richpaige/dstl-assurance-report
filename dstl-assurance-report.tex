@@ -27,7 +27,7 @@ Department of Computer Science, University of York, UK.\\
 This report briefly summarises the technical challenges associated with certification (and re-certification)
 of software after a particular obsolescence management strategy -- described in a companion report -- has
 been carried out. In particular, it firstly considers the types of evidence that can
-be produced by the management strategy. Secondly, it considers the DO-178B and DO-178C objectives (and briefly touches on the Model-Based Development supplement to DO-178C) and analyses where specific objectives
+be produced by the management strategy. Secondly, it considers the DO-178C objectives (and briefly touches on the Model-Based Development supplement to DO-178C as well as DO-254) and analyses where specific objectives
 may need to be reconsidered in order to achieve re-certification. In this manner it aims to demonstrate where
 re-certification effort may need to be prioritised. Finally, it briefly comments on two issues: qualification of tools that support
 the management strategy, and automatic generation of certification cases, which may help to reduce the amount of effort 
@@ -68,8 +68,8 @@ software obsolescence on several case studies; assurance and certification has b
 report is primarily speculative. It is structured as follows. Firstly, we describe the evidence that is produced by the 
 obsolescence strategy and technical solution that is relevant to certification and recertification. We also briefly describe
 the toolchain that has been developed to support the obsolescence strategy, so that the report is moderately self-contained
-and hence easier to follow. Next, we analyse the DO-178B and DO-178C objectives and summarise which specific objectives \textit{must} and
-\textit{could} be reconsidered as a result of applying the strategy. Finally, we comment on two issues: that of tool qualification
+and hence easier to follow. Next, we analyse the DO-178C objectives and summarise which specific objectives \textit{must} and
+\textit{could} be reconsidered as a result of applying the strategy; we also speculate on impact on DO-254 and comment on the Model-Based Development supplement to DO-178C. Finally, we comment on two issues: that of tool qualification
 (and the challenges that will arise in qualifying the toolchain developed within this project), and of automatically generating 
 assurance/safety cases from the engineering artefacts that are provided as input to the obsolescence strategy.
 
@@ -96,7 +96,7 @@ systems. In particular, we proposed a combination of code analysis, code-based
 transformation and verification/validation techniques for the 
 \textit{modernisation} of software systems.
 Figure~\ref{fig:approach} depicts an overview of the proposed approach to 
-software modernisation. 
+software modernisation, which is described in more detail in \cite{Gerasimou2017}.
 
 \begin{figure}[htbp]
 	\vspace*{-2em}
@@ -118,7 +118,7 @@ re-architect the software, if needed.
 
 The approach illustrated in Figure~\ref{fig:approach} is based on the use of transformation technology.
 Two types of transformations have been used to support rehosting: extraction 
-transformations (to ``pull''Äù abstract specifications from legacy code) and text 
+transformations (to ``pull'' abstract specifications from legacy code) and text 
 generators, based on templates. The transformations have been implemented using Epsilon, the rich C/C++ parsing and analysis 
 infrastructure provided by the Eclipse CDT project, and ANTLR/Xtext to support 
 additional languages 
@@ -158,16 +158,16 @@ been tested and can be further audited and reviewed, in much the same way as a c
 we briefly discuss some of the challenges of qualifying migration tool chains like the one we have developed).
 \end{itemize}
 
-In the next section we briefly discuss the impact of migration on relevant safety standards -- particularly DO-178B and DO-178C -- and analyse the effect of migrating
+In the next section we briefly discuss the impact of migration on relevant safety standards -- particularly  DO-178C -- and analyse the effect of migrating
 a software system using the technical approach on any previously existing safety argument and safety process.
 
-\section{Certification and DO-178B/C Objectives}
-In this section we discuss issues associated with migrating a software application where the original system has been certified with respect to either DO-178B or DO-178C,
+\section{Certification and DO-178C Objectives}
+In this section we discuss issues associated with migrating a software application where the original system has been certified with respect to  DO-178C,
 which are appropriate standard to be used in the development of a legacy airborne system. In particular, what we wish to investigate is the \textit{impact}
-of migration on an accomplishment summary. Recall that DO-178B and DO-178C identify a set of software activities that can take place within the context of a broader 
-engineering process, and requires an accomplishment summary \cite{DO178B} as part of the certification deliverables. The accomplishment summary is a 
+of migration on an accomplishment summary. Recall that DO-178C (and DO-178B for that matter) identifies a set of software activities that can take place within the context of a broader 
+engineering process, and requires an accomplishment summary \cite{DO178C} as part of the certification deliverables. The accomplishment summary is a 
 document that demonstrates compliance of a system with the plan for software aspects of certification. The accomplishment summary in
-DO-178B (DO-178C is largely similar at a high level; we consider the specific differences shortly) requires the following to be addressed:
+DO-178C (DO-178B is largely similar at a high levey) requires the following to be addressed:
 
 \begin{enumerate}[(a)]
 \item System overview
@@ -183,7 +183,7 @@ DO-178B (DO-178C is largely similar at a high level; we consider the specific di
 \item Compliance statement
 \end{enumerate}
 
-The primary safety argument underlies the software life cycle data. This is clear in Annex A of DO-178B, which provides tables of objectives for each of ten areas (there are additional entries in objective tables for DO-178C). The tables are:
+The primary safety argument underlies the software life cycle data. This is clear in Annex A of DO-178C, which provides tables of objectives for each of ten areas (DO-178B is largely a subset of these objectives, with some variation in the details, e.g., treatment of Parameter Data Files). The tables are:
 \begin{enumerate}
 \item Software Planning Process
 \item Software Development Process
@@ -199,27 +199,27 @@ The primary safety argument underlies the software life cycle data. This is clea
 
 Several of the tables map directly to the accomplishment summary, e.g., Table 8 relates to point h, software identification, and Table 10 relates to point c. The majority of tables, i.e. 3-7, are primarily providing support for point f, software life cycle data, in the accomplishment summary. 
 
-So if an accomplishment summary has been produced for a legacy system, and the software application has been migrated, then the accomplishment summary will no longer be valid and accurate for the migrated application. What parts of the accomplishment summary -- i.e., the Objective tables in DO-178B Annex A -- will either be invalidated (and hence require full work) or partially invalidated? We briefly outline the results of our initial analysis. We attempt to indicate if Objectives for DO-178B and DO-178C are \textit{directly} impacted by the application of the migration technology and strategy (and hence substantial work will be required to rebuild an accomplishment summary), and if Objectives are \textit{indirectly} impacted (in which case any rework will hopefully be minor). 
+So if an accomplishment summary has been produced for a legacy system, and the software application has been migrated, then the accomplishment summary will no longer be valid and accurate for the migrated application. What parts of the accomplishment summary -- i.e., the Objective tables in DO-178C Annex A -- will either be invalidated (and hence require full work) or partially invalidated? We briefly outline the results of our initial analysis. We attempt to indicate if Objectives for DO-178C are \textit{directly} impacted by the application of the migration technology and strategy (and hence substantial work will be required to rebuild an accomplishment summary), and if Objectives are \textit{indirectly} impacted (in which case any rework will hopefully be minor). 
 
 The assumptions that we make in carrying out this analysis are as follows.
 \begin{itemize}
-\item The original system has been developed according to DO-178B. Given that we are migrating legacy aerospace applications, at least in theory, this seems a reasonable assumption. In future, we should expect that development has been carried out according to DO-178C. 
+\item The original system has been developed according to DO-178C. This may be an unreasonable assumption, given that we are migrating legacy aerospace applications; it may be more reasonable to assume that they had been developed according to DO-178B. However, the similarities between objective tables across the two standards should allow us to make at least an initial analysis.
 \item The migrated system is to be certified against DO-178C.
-\item The software has been migrated using our technical approach, outlined in the previous section;
+\item The software has been migrated using our technical approach, outlined in the previous section and in \cite{Gerasimou2017};
 \item Test cases from the original system are available (and these test cases are automated and executable).
 \end{itemize}
-We present two different but closely related analyses. The first is a preliminary assessment of the impact of migration purely against the DO-178B objectives. This takes into account projects where the migrated system is to be certified once again against DO-178B objectives. The second is a preliminary assessment of the impact of migration against DO-178C objectives. We also briefly touch on the Model-Based Development annexe. All of our analyses are preliminary, 
+We present an initial analysis of the DO-178C objectives. We also briefly touch on the Model-Based Development annexe, and DO-254. The latter two standards are discussed only briefly as the primary focus in the project was on software rehosting and Model-Based Development techniques were not used broadly). All of our analyses are preliminary, 
 given the time and resource available to us in the project. It would also be interesting to consider technical migration of accomplishment summaries from DO-178B to DO-178C, but this is a research project in and of itself.
 
-\subsection{DO-178B Assessment}
-\label{sec:DO178B}
-In this section we briefly analyse the impact of migration against DO-178B objectives.
+\subsection{DO-178C Assessment}
+\label{sec:DO178C}
+In this section we briefly analyse the impact of migration against DO-178C objectives.
 
 \subsubsection{Table A-1: Software Planning Process}
-Our view is that this table is only indirectly (and lightly) impacted by the application of the migration strategy and approach. There will be one-off costs associated with documenting the new development process associated with the migrated application (which is a combination of the original development process and the application of the obsolescence strategy), setting up the process, explaining it to the certification authority, etc. There may also be process improvement issues as developers become more experienced with the migration approach and can see ways to improve it or extend it. 
+Our view is that this table is only indirectly (and lightly) impacted by the application of the migration strategy and approach. There will be one-off costs associated with documenting the new development process associated with the migrated application (which is a combination of the original development process and the application of the obsolescence strategy), setting up the process, explaining it to the certification authority, etc. There may also be process improvement issues as developers become more experienced with the migration approach and can see ways to improve it or extend it. With respect to A-1-7, there is a question as to whether the software plans for the legacy system consider rehosting and migration. If they do not, they should be revised and this process should be coordinated.
 
 \subsubsection{Table A-2: Software Development Processes}
-Our view is that this table is indirectly impacted by the application of the migration strategy. We are assuming that the requirements have not changed, and that an architecture is still developed. The most signfiicant impact should be with objective A-2-6 (Source code is developed) -- the migration approach produces new source code, but it is generated automatically rather than manually by an engineer. It may be that documenting the process by which source code is produced is sufficient to convince a certifying authority.
+Our view is that this table is indirectly impacted by the application of the migration strategy. We are assuming that the requirements have not changed, and that an architecture is still developed. The most signfiicant impact may be with objective A-2-6 (Source code is developed) -- the migration approach produces new source code, but it is generated automatically rather than manually by an engineer. It may be that documenting the process by which source code is produced is sufficient to convince a certifying authority. A-2-7 is also interesting: we assume the parameter data files are invariant across the legacy and rehosted system. However, if we are interested in qualifying the technical solution itself, ensuring that parameter data files for the solution (i.e., the legacy application itself, as well as any of its parameter data files) will need to be loaded. This is not a difficult issue to deal with, but it does increase the number of artefacts that engineers must manage.
 
 \subsubsection{Table A-3: Verification of Outputs of Software Requirements Process}
 This table is indirectly impacted, but it is here that we start to see a greater impact from migration: the impact will be mitigated by reuse of tests to demonstrate that algorithms remain accurate. However, migration to a new hardware platform may affect algorithm accuracy, and so it is questionable whether, in all circumstances, that reused acceptance, integration and system tests will be sufficient to fully demonstrate that the compliance and consistency objectives have been met. If, however, reuse of tests is not possible for whatever reason, this objective will be directly and significantly impacted and all objectives in the table may need to be re-established.
@@ -235,6 +235,8 @@ This table may be \textit{directly} impacted, particularly because this requires
 
 Another issue to consider is independence: if original code is migrated, is the independence (required for A-5-1) lost? Does anything new have to be done to re-establish independence when assuring the migrated code? At worst, independence will have to be entirely re-established if the project is operating at software level A or B.
 
+A-5-8 and A-5-9 are similar to A-1-7 (discussed earlier): we assume that parameter data files do not change due to migration, but there existence adds another level of detail that must be managed in qualification.
+
 %% This one is tricky, especially A-5-5 traceability of code to low-level requirements
 %% Also, what about the independence argument for A-5-1 and A-5-2; if you migrate the code does that invalidate the independence from the
 %% original, if you are at SW Level A or B? 
@@ -243,7 +245,7 @@ Another issue to consider is independence: if original code is migrated, is the 
 This table is \textit{directly} impacted by application of the migration strategy, largely because it involves object code that must be produced from source code. As such, objectives A-6-1 through A-6-5 have to be carried out again once new object code has been produced from the new source code. Are there opportunities for reuse of the original safety argument? Perhaps -- the main difficulty will be in producing evidence to show how new object code relates to the original object code (the migration strategy that we have developed generates traceability information only for rehosting of source code; an instrumented compiler would be needed to generate traceability information for object code). If such traceability information could be provided, then a model weaving approach may potentially be applied, similar to what was discussed in Section~\ref{sec:a-5}.
 
 \subsubsection{Table A-7: Verification of Verification Process Results}
-This table will be \textit{directly} impacted by migration assuming that test cases (and test procedures etc) from the original application are available. However the direct impact may not be as significant as in some of the previous tables. Assuming that test cases and procedures are reused, then we do not expect objectives A-7-1 through A-7-4 to be affected. However objectives A-7-4 through A-7-8 may have to be re-established as it may be the case that the source code structures have changed as a result of rehosting (e.g., introduction of new control structures due to introduction of a new library or API), and previous MC/DC evidence is no longer valid. However, if it possible to evidence that the source code structures have not changed as a result of migration (which may be the case if it is a like-for-like API replacement), then the previous evidence may remain valid.
+This table will be \textit{directly} impacted by migration assuming that test cases (and test procedures etc) from the original application are available. However the direct impact may not be as significant as in some of the previous tables. Assuming that test cases and procedures are reused, then we do not expect objectives A-7-1 through A-7-4 to be affected. However objectives A-7-4 through A-7-8 may have to be re-established as it may be the case that the source code structures have changed as a result of rehosting (e.g., introduction of new control structures due to introduction of a new library or API), and previous MC/DC evidence is no longer valid. However, if it possible to evidence that the source code structures have not changed as a result of migration (which may be the case if it is a like-for-like API replacement), then the previous evidence may remain valid. A-7-9 is very interesting: in general, additional code will be conservatively copied from legacy system to rehosted system, and hence evidence for A-7-9 for the legacy application should still hold. However, it may be possible for the rehosting process to identify such code as a ``bad smell''\footnote{Note: we have not done this in the current project.} so that it can either be removed or appropriate verification can be carried out.
 
 \subsubsection{Table A-8: Software Configuration Management Process}
 This table will be \textit{indirectly} affected. The issue here is whether the technical solution to software migration should be supported by the configuration management process. Effectively, does the software life cycle \textit{include} the technical software migration phase, or is this phase assumed to be out of scope? In our view it should be consider in-scope as some of the evidence used to support re-certification (traceability data) is produced by the technical solution. This traceability data must be considered in baselining activities under A-8-2. Additionally, new configuration items related to the components of the technical solution (grammars, parsers, templates, transformations) should also be considered in A-8-1. It may be that the other objectives can remain unchanged.
@@ -254,11 +256,73 @@ This table is arguably \textit{indirectly} impacted, largely because the softwar
 \subsubsection{Table A-10: Certification Liaison Process}
 This table is of course \textit{directly} impacted across all objectives as there will be changes made to the production of an accomplishment summary for the migrated code, and the certifying authority will need to be informed and will need to buy-in to the new processes. Given that certifying authorities are increasingly aware of DO-178C (and, for example, the model-based design annexe, which is aimed at supporting lifecycles with some similarity to our technical solution), this may be less problematic and challenging today than it was several years ago.
 
-\subsection{DO-178C Assessment}
-In this section we briefly analyse the impact of migration against the objectives of DO-178C. Given the close relationship between DO-178B and DO-178C (i.e., the latter is a minor revision of the former) many of the observations made in Section~\ref{sec:DO178B} apply directly to the equivalent objective in DO-178C. We point out specific differences in this section.
+Table~\ref{table:summary} summarises the objectives and the impact that rehosting may have on them.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline\hline
+\textbf{Objective Table} & \textbf{Direct Impact} & \textbf{Indirect Impact} \\ \hline
+A-1 & & $\surd$ \\ \hline
+A-2 & & $\surd$ \\ \hline
+A-3 & & $\surd$ \\ \hline
+A-4 & $\surd$ & \\ \hline
+A-5 & $\surd$ & \\ \hline
+A-6 & $\surd$ & \\ \hline
+A-7 & $\surd$ & \\ \hline
+A-8 & & $\surd$ \\ \hline
+A-9 & & $\surd$ \\ \hline
+A-10 & $\surd$ & \\ \hline\hline
+\end{tabular}
+\end{center}
+\caption{Summary of DO-178C objective tables and how they are impacted by the migration approach}
+\label{table:summary}
+\end{table}
 
 \subsubsection{Model-Based Development Supplement}
-One issue that we have not considered in detail is applicability of and conformance to the Model-Based Development supplement of DO-178C. The supplement specifically aims to address usage of principled and automated abstractions in expressing requirements, producing code (i.e., code generation) and tracing requirements through to code. The technical solution produced in this project is, broadly, not a model-based development approach to rehosting, as it operates on source code. However, it does follow some of the principles of MBD -- e.g., the use of abstract internal representations (ASTs), the use of structured code generation technology (templates), and the use of modelling tools (Epsilon) to implement the toolchain. As such, certification of a migrated application under DO-178C following the MBD supplement is a promising route forward.
+One issue that we have not considered in detail is applicability of and conformance to the Model-Based Development (MBD) supplement of DO-178C. The supplement specifically aims to address usage of principled and automated abstractions in expressing requirements, producing code (i.e., code generation) and tracing requirements through to code. The technical solution produced in this project is, broadly, not a model-based development approach to rehosting, as it operates on source code. However, it does follow some of the principles of MBD -- e.g., the use of abstract internal representations (ASTs), the use of structured code generation technology (templates), and the use of modelling tools (Epsilon) to implement the toolchain. As such, certification of a migrated application under DO-178C following the MBD supplement is a promising route forward.
+
+\subsubsection{DO-254 Analysis}
+The focus of the project has been on software migration, and developing technical solutions to the challenges of software rehosting. However, one of the experiments has briefly considered hardware migration in a restricted form, focusing on software API remapping that is needed when replacing hardware components (e.g., changes in sensors). As a result of these experiments we can briefly comment on the impact of rehosting on different aspects of the DO-254 \textit{lifecycle}, as to where significant effort may be required as a result of migration.
+
+The DO-254 lifecycle is summarised in Figure~\ref{fig:DO254}.
+
+\begin{figure}[htbp]
+	\vspace*{-2em}
+	\centering
+	\includegraphics[width=1.1\linewidth]{DO254.pdf}
+	
+	\caption{DO-254 lifecycle, taken from \cite{DO254}.}
+	\label{fig:DO254}
+	
+	\vspace*{-2em}
+\end{figure}
+
+With respect to the key phases in Figure~\ref{fig:DO254}, we observe the following.
+
+\begin{itemize}
+\item The \textit{System Process} (DO-254 Section 2) is unlikely to be impacted as the DAL level should remain the same after rehosting, and the derived requirements should
+not change.
+
+\item The \textit{Planning Process} (DO-254 Section 4) will change as the plan for hardware aspects of certification will be impacted by the new hardware (whether it is new components or a new processor). Given the importance of the PHAC and the need for agreement on it with the certifying authority, it is very important that sufficient resource be allocated to this activity.
+
+\item The \textit{Requirements Capture} (DO-254 Section 5.1) task is unlikely to be impacted, as we can assume that a sensible requirements capture mechanism has been established for the legacy project.
+
+\item The \textit{Conceptual Design} (DO-254 Section 5.2) task may be impacted, depending on the extent of the hardware changes. If the changes involve replacing like-with-like (i.e., behavioural similar/identical component replacement) then there will be no impact. A wholesale processor change may result in the need for a conceptual redesign, however.
+
+\item The \textit{Detailed Design} (DO-254 Section 5.3) will be impacted, as it must take into account the new hardware components and/or processors as well as any additional design (e.g., FPGA design). 
+
+\item The textit{Implementation} (DO-254 Section 5.4) may not be impacted if there is only component replacement, but no new design (i.e., FPGA or VHDL code).
+
+\item We did not consider \textit{Production Transition}.
+
+\item The \textit{Validation and Verification} (DO-254 Section 6) will be impacted in terms of verification and in terms of traceability, i.e., that requirements are traceable to their implementation. It may be that some of the traceability information from the legacy application can be reused (because some of the hardware design may not change).
+
+\item \textit{COnfiguration Management} (DO-254 Section 7) is unlikely to be impacted as it should be possible to reuse what was developed for the legacy project.
+
+\item \textit{Process Assurance} (DO-254 Section 8) should be unchanged, assuming that the project role was identified in the legacy project.
+
+\item \textit{Certification Liaison} (DO-254 Section 9) should be unaffected, assuming that engagement with the certifying authority was established for the legacy project.
+\end{itemize}
 
 \section{The Future: Tool Qualification and Assurance Case Generation}
 In this section we briefly explore two issues that have not been considered at all in this project -- tool qualification and assurance case generation -- and posit on some of the difficulties associated with their use in the future.
@@ -273,7 +337,7 @@ DO-178C defines three criteria that determine the applicable tool qualification 
 \end{quotation}
 Criteria 2 relates to verification processes (which are not considered by the technical solution), whereas Criteria 3 relates to failure of detection of errors. We do not believe that Criteria 3 is relevant as it is focused on verification tools. As such, Criteria 1 is relevant to the technical solution. If the qualification criterion for the software application being rehosted is Level C, then the applicable TQL is level 3: the replacement of DO-178B development tool for each software level.
 
-With respect to DO-330/ED-215, there are a number of considerations related to tool qualification for the technical solution. 
+With respect to DO-330/ED-215 \cite{DO330}, there are a number of considerations related to tool qualification for the technical solution. 
 
 Firstly, the operational environment for the technical solution needs to be established. This needs to meet specific objectives related to installing the technical solution in the appropriate environment, showing that the tool requirements are compatible with the operational environment, etc. It should be observed that the technical solution has been developed in an iterative and incremental manner, in close collaboration with DSTL, and as such a rigorous requirements specification for the tool has not been produced. As such, additional future work will need to be carried out on this. This should likely include the \textit{Tool Operational Requirements (TOR)} (i.e., Section~10.3.1 of DO-330). 
 
@@ -300,7 +364,7 @@ We envision a larger research program to assess the challenges and difficulties 
 \subsection{Assurance Case Generation}
 Part of the process of assuring a migrated/rehosted software system is to develop (or revise) an assurance or safety case, e.g., represented using GSN or a similar notation. In an ideal situation it would be feasible to carry out an impact analysis on an assurance case, after rehosting, in order to identify what has changed within an argument structure. This would require, for example, traceability information to have been recorded between the assurance case and the original system artefacts (e.g., source code, architecture and design models, tests). It is unlikely to be able to find such information easily in legacy projects -- some is implicit, some will be scattered across multiple documents, some will be tacit. As such, an impact analysis will largely be a manual process. Using the technical solution developed in this project will help with this, as traceability information will be recorded between original and migrated code, but the links with the legacy assurance or safety case will likely not be available.
 
-In terms of future proofing and making the technical solution more useful going forward, we can suggest an approach to \textit{assurance case generation} from engineering artefacts, including source code, design models and architectures. The approach described in \cite{HASE2015} shows how to generate outline/template assurance cases from artefacts through the use of weaving models, which are based on traceability information.  This approach is compatible with what the technical solution developed in this project has produced, but some further infrastructure would need to be produced to represent traceability information as a weaving model. The approach would not generate a complete assurance or safety case, but a template that engineers could complete (much as the technical solution developed in this project does not generate a complete migrated application). 
+In terms of future proofing and making the technical solution more useful going forward, we can suggest an approach to \textit{assurance case generation} from engineering artefacts, including source code, design models and architectures. The approach described in \cite{HASE15} shows how to generate outline/template assurance cases from artefacts through the use of weaving models, which are based on traceability information.  This approach is compatible with what the technical solution developed in this project has produced, but some further infrastructure would need to be produced to represent traceability information as a weaving model. The approach would not generate a complete assurance or safety case, but a template that engineers could complete (much as the technical solution developed in this project does not generate a complete migrated application). 
 
 The idea with automatically generating assurance cases is to ensure that all the information required to support future impact analyses is recorded and persisted, and to reduce the amount of effort required to update a safety case in the future. Unfortunately it was not possible to investigate the generation of assurance cases in this project, but some aspects of this are being explored in the ATI-funded project SECT-AIR.
 

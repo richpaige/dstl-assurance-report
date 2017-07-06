@@ -317,7 +317,7 @@ not change.
 
 \item The \textit{Validation and Verification} (DO-254 Section 6) will be impacted in terms of verification and in terms of traceability, i.e., that requirements are traceable to their implementation. It may be that some of the traceability information from the legacy application can be reused (because some of the hardware design may not change).
 
-\item \textit{COnfiguration Management} (DO-254 Section 7) is unlikely to be impacted as it should be possible to reuse what was developed for the legacy project.
+\item \textit{Configuration Management} (DO-254 Section 7) is unlikely to be impacted as it should be possible to reuse what was developed for the legacy project.
 
 \item \textit{Process Assurance} (DO-254 Section 8) should be unchanged, assuming that the project role was identified in the legacy project.
 
@@ -350,7 +350,7 @@ The TOR for the technical solution that has been produced is complicated, in par
 
 \item The TOR can largely reuse definitions of output files, as these are also expected to be standards-compliant C or C++. However, it is also possible to output \textit{trace links} (in the form of an XML representation) and this should be captured as well.
 
-\item Abnormal activation modes in the TOR should consider parser failure (e.g., on erroneous or malformed C/C++ input), exceptions within the execution of the Eclipse tooling, and malformed output (e.g., C/C++ that does not parse). It may be possible to construct an argument that the technical solution only produces C/C++ code that does not lead to abnormal activation modes (specifically, that the solution produces C/C++ code that is syntactically well-formed and does not lead to an error in the execution of the tool - though this does not guarantee that the C/C++ code produced by the solution is valid). Abnormal activation modes may also need to consider how the software vulnerabilities identified in \textbf{Burns 2017 (Replace with Reference)} are checked.
+\item Abnormal activation modes in the TOR should consider parser failure (e.g., on erroneous or malformed C/C++ input), exceptions within the execution of the Eclipse tooling, and malformed output (e.g., C/C++ that does not parse). It may be possible to construct an argument that the technical solution only produces C/C++ code that does not lead to abnormal activation modes (specifically, that the solution produces C/C++ code that is syntactically well-formed and does not lead to an error in the execution of the tool - though this does not guarantee that the C/C++ code produced by the solution is valid). Abnormal activation modes may also need to consider how the software vulnerabilities identified in \cite{Burns2017} are checked.
 
 \item Production of DO-330 Tool Requirements (as opposed to TOR) will be more expensive as this will require description of all tool functions and features. What is challenging here is that Eclipse provides a wealth of functions and features, many of which are not used by the technical solution. Thus, qualification of the solution may need to consider partitioning into features of Eclipse (and Epsilon) that are ``in scope'' and features that are out of scope.
 
